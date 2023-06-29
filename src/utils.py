@@ -1,9 +1,7 @@
-import os
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
-from dotenv import load_dotenv
 
-load_dotenv()
+from src.config import config
 
 
 def get_web_client(token: str):
@@ -13,14 +11,13 @@ def get_web_client(token: str):
 def verify_auth_token(token: str):
     try:
         client = get_web_client(token)
-        client_id = os.environ.get("SLACK_CLIENT_ID")
-        client_secret = os.environ.get("SLACK_CLIENT_SECRET")
         response = client.oauth_v2_access(
-            client_id=client_id,
-            client_secret=client_secret,
+            client_id=config.SLACK_CLIENT_ID,
+            client_secret=config.SLACK_CLIENT_SECRET,
             code=token,
         )
         return response
+    
     except SlackApiError as e:
         return {"error": e}
     
@@ -32,6 +29,6 @@ def get_user_info(user_token: str, user_id: str):
             user=user_id,
         )
         return response
+    
     except SlackApiError as e:
         return {"error": e}
-    
