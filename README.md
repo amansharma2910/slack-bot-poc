@@ -24,6 +24,11 @@ Here is the sample `.env` file to be added to the root of your source code.
 ```
 SLACK_CLIENT_ID=<app_client_ID>
 SLACK_CLIENT_SECRET=<app_client_secret>
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
+POSTGRES_SERVER=<"db" if using docker-compose or "localhost">
+POSTGRES_PORT=5432
 ```
 
 
